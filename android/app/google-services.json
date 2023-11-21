@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "205534458689",
+    "project_id": "extagram-flutter",
+    "storage_bucket": "extagram-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205534458689:android:cfdbda7db8a52dad0267c0",
+        "android_client_info": {
+          "package_name": "com.example.extagram_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsSVP-V9r8-NTXey2oqHhPotgPtwP6zmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
