@@ -1,16 +1,21 @@
-import 'package:extagram_flutter/state/auth/backend/authenticator.dart';
+import 'package:extagram_flutter/login_view.dart';
+import 'package:extagram_flutter/main_view.dart';
+import 'package:extagram_flutter/state/auth/providers/is_logged_in_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'firebase_options.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,47 +31,15 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(),
-    );
-  }
-}
-
-GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: [
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ],
-);
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Extagram'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            const Text('Extagram'),
-            ElevatedButton(
-              onPressed: () async {
-                final result = await Authenticator().loginWithGoogle();
-                print(result);
-              },
-              child: const Text('Google'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final result = await Authenticator().loginWithFacebook();
-                print(result);
-              },
-              child: const Text('Facebook'),
-            ),
-          ],
-        ),
+      home: Consumer(
+        builder: (context, ref, child) {
+          final isLoggedIn = ref.watch(isLoggedInProvider);
+          if (isLoggedIn) {
+            return const MainView();
+          } else {
+            return const LoginView();
+          }
+        },
       ),
     );
   }
