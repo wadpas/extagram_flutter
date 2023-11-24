@@ -1,4 +1,4 @@
-import 'package:extagram_flutter/state/auth/results/auth_result.dart';
+import 'package:extagram_flutter/state/auth/models/auth_result.dart';
 import 'package:extagram_flutter/state/posts/typedefs.dart/user_id.dart';
 import 'package:flutter/foundation.dart';
 

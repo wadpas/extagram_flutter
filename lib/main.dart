@@ -1,3 +1,4 @@
+import 'package:extagram_flutter/state/auth/backend/authenticator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -37,27 +38,6 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
   ],
 );
 
-Future<void> _handleSignIn() async {
-  try {
-    await _googleSignIn.signIn();
-  } catch (error) {
-    print('hello');
-  }
-}
-
-void ff() async {
-  final LoginResult result = await FacebookAuth.instance
-      .login(); // by default we request the email and the public profile
-// or FacebookAuth.i.login()
-  if (result.status == LoginStatus.success) {
-    // you are logged
-    final AccessToken accessToken = result.accessToken!;
-  } else {
-    print(result.status);
-    print(result.message);
-  }
-}
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -70,16 +50,21 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
+            const Text('Extagram'),
             ElevatedButton(
-              onPressed: _handleSignIn,
-              child: Text('sign'),
+              onPressed: () async {
+                final result = await Authenticator().loginWithGoogle();
+                print(result);
+              },
+              child: const Text('Google'),
             ),
-            Text('Extagram'),
             ElevatedButton(
-              onPressed: ff,
-              child: Text('f'),
+              onPressed: () async {
+                final result = await Authenticator().loginWithFacebook();
+                print(result);
+              },
+              child: const Text('Facebook'),
             ),
-            Text('Extagram'),
           ],
         ),
       ),

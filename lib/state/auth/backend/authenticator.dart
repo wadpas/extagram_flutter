@@ -1,11 +1,13 @@
 import 'package:extagram_flutter/state/auth/constants/constants.dart';
-import 'package:extagram_flutter/state/auth/results/auth_result.dart';
+import 'package:extagram_flutter/state/auth/models/auth_result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:extagram_flutter/state/posts/typedefs.dart/user_id.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authenticator {
+  const Authenticator();
+
   UserId? get userId => FirebaseAuth.instance.currentUser?.uid;
   bool get isLoggedIn => userId != null;
   String get displayName =>
@@ -20,10 +22,12 @@ class Authenticator {
 
   Future<AuthResult> loginWithFacebook() async {
     final loginResult = await FacebookAuth.instance.login();
+
     final token = loginResult.accessToken?.token;
     if (token == null) {
       return AuthResult.aborted;
     }
+
     final oauthCredential = FacebookAuthProvider.credential(token);
     try {
       await FirebaseAuth.instance.signInWithCredential(oauthCredential);
@@ -55,6 +59,7 @@ class Authenticator {
     if (signInAccount == null) {
       return AuthResult.aborted;
     }
+
     final googleAuth = await signInAccount.authentication;
     final oauthCredential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
