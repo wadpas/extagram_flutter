@@ -1,6 +1,6 @@
-import 'package:extagram_flutter/state/auth/providers/auth_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:extagram_flutter/state/auth/providers/auth_state_provider.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
