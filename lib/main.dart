@@ -1,6 +1,8 @@
 import 'package:extagram_flutter/login_view.dart';
 import 'package:extagram_flutter/main_view.dart';
 import 'package:extagram_flutter/state/auth/providers/is_logged_in_provider.dart';
+import 'package:extagram_flutter/state/providers/is_loading_provider.dart';
+import 'package:extagram_flutter/views/components/loading/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -33,6 +35,18 @@ class MyApp extends StatelessWidget {
       ),
       home: Consumer(
         builder: (context, ref, child) {
+          ref.listen<bool>(
+            isLoadingProvider,
+            (_, isLoading) {
+              if (isLoading) {
+                LoadingScreen.instance().show(
+                  context: context,
+                );
+              } else {
+                LoadingScreen.instance().hide();
+              }
+            },
+          );
           final isLoggedIn = ref.watch(isLoggedInProvider);
           if (isLoggedIn) {
             return const MainView();

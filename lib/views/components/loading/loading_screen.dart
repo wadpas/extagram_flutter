@@ -8,7 +8,7 @@ import '../constants/strings.dart';
 class LoadingScreen {
   LoadingScreen._sharedInstance();
   static final LoadingScreen _shared = LoadingScreen._sharedInstance();
-  factory LoadingScreen.instanse() => _shared;
+  factory LoadingScreen.instance() => _shared;
 
   LoadingScreenController? _controller;
 
@@ -27,7 +27,7 @@ class LoadingScreen {
   }
 
   void hide() {
-    _controller?.close;
+    _controller?.close();
     _controller = null;
   }
 
