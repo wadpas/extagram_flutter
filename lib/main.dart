@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'Extagram',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.pink,
+          seedColor: Colors.purple.withRed(200),
         ),
         useMaterial3: true,
       ),

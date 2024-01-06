@@ -13,8 +13,8 @@ class LoginView extends ConsumerWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Extagram'),
             ElevatedButton(
               onPressed: ref.watch(authStateProvider.notifier).loginWithGoogle,
               child: const Text('Google'),
