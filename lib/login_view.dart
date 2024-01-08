@@ -1,4 +1,5 @@
 import 'package:extagram_flutter/state/auth/providers/auth_state_provider.dart';
+import 'package:extagram_flutter/views/login/login_view_signup_links.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,6 +25,7 @@ class LoginView extends ConsumerWidget {
                   ref.watch(authStateProvider.notifier).loginWithFacebook,
               child: const Text('Facebook'),
             ),
+            LoginViewSignupLinks(),
           ],
         ),
       ),
